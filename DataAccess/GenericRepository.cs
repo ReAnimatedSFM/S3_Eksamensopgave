@@ -59,6 +59,11 @@ namespace DataAccess
             });
         }
 
+        public virtual async Task<TEntity> GetByIdAsync(object id)
+        {
+            return await dbSet.FindAsync(id);
+        }
+
         #endregion
 
     }

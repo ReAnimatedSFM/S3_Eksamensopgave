@@ -13,6 +13,9 @@ namespace DataAccess.Interface
     public interface IUnitOfWork : IDisposable
     {
         SOPOContext Context { get; }
+        AssignmentRepository AssignmentRepository { get; }
+        EmployeeRepository EmployeeRepository { get; }
+        ResidentRepository ResidentRepository { get; }
 
         Task SaveAsync();
     }
