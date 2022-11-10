@@ -22,7 +22,7 @@ namespace Services
 
         public async Task UpdateAssignmentNotesAsync(Assignment assignmentToUpdate)
         {
-            await DoHttpPutRequest($"Assignments", assignmentToUpdate);
+            await DoHttpPutRequest($"Assignments/Updated", assignmentToUpdate);
         }
     }
 }

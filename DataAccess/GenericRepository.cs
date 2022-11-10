@@ -51,6 +51,11 @@ namespace DataAccess
             });
         }
 
+        public virtual void Update(TEntity entityToUpdate)
+        {
+            dbSet.Update(entityToUpdate);
+        }
+
         public async Task UpdateAsync(TEntity entityToUpdate)
         {
             await Task.Run(() =>

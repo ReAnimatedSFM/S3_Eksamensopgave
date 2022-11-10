@@ -39,11 +39,11 @@ namespace RestApi.Controllers
             return Ok(await assignmentRepository.GetByIdAsync(assignment.Id));
         }
 
-        [HttpPut]
+        [HttpPut("Updated")]
         public async Task<IActionResult> UpdateAssignment(Assignment assignment)
         {
             await assignmentRepository.UpdateAsync(assignment);
-            await assignmentRepository.SaveAsync();
+            await unitOfWork.SaveAsync();
             return Ok();
         }
 

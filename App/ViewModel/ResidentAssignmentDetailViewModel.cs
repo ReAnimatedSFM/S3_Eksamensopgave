@@ -48,8 +48,6 @@ namespace App.ViewModel
             assignment.Finished = true;
 
             await assignmentService.UpdateAssignmentNotesAsync(assignment);
-            Assignments.Clear();
-            await Initialize();
         }
 
         [ICommand]
