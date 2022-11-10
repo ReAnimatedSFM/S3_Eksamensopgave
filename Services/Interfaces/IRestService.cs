@@ -12,5 +12,6 @@ namespace Services.Interfaces
         Task<string> DoHttpPostRequest(string controllerUrl, TEntity entityToInsert);
         Task<string> DoHttpPutRequest(string controllerUrl, TEntity entityToUpdate);
         Task<string> DoHttpDeleteRequest(string controllerUrl);
+        Task<TEntity> DoHttpGetSingleRequest(string controllerUrl);
     }
 }

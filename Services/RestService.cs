@@ -25,6 +25,19 @@ namespace Services
             }
         }
 
+        public async Task<TEntity> DoHttpGetSingleRequest(string controllerUrl)
+        {
+            TEntity returnResponse;
+            using (var client = new HttpClient())
+            {
+                string url = $"{baseUrl}/{controllerUrl}";
+                var apiResponse = await client.GetAsync(url);
+
+                returnResponse = JsonConvert.DeserializeObject<TEntity>(await apiResponse.Content.ReadAsStringAsync());
+                return returnResponse;
+            }
+        }
+
         public async Task<string> DoHttpPostRequest(string controllerUrl, TEntity entityToInsert)
         {
             string returnResponse = $"Something went wrong, trying to insert {nameof(TEntity)}...";

@@ -1,7 +1,7 @@
-﻿using Entities;
+﻿using App.ViewModel;
+using Entities;
 using Services;
 using Services.Interfaces;
-using ViewModel;
 
 namespace App
 {
@@ -24,6 +24,10 @@ namespace App
             builder.Services.AddTransient<IEmployeeService, EmployeeService>();
             builder.Services.AddTransient<EmployeePage>();
             builder.Services.AddTransient<EmployeeViewModel>();
+
+            builder.Services.AddTransient<IAssignmentService, AssignmentService>();
+            builder.Services.AddTransient<ResidentAssignmentDetailPage>();
+            builder.Services.AddTransient<ResidentAssignmentDetailViewModel>();
 
             return builder.Build();
         }

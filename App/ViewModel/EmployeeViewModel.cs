@@ -4,7 +4,7 @@ using Entities;
 using Services.Interfaces;
 using System.Collections.ObjectModel;
 
-namespace ViewModel
+namespace App.ViewModel
 {
     public partial class EmployeeViewModel : ObservableObject
     {
@@ -20,9 +20,9 @@ namespace ViewModel
         ObservableCollection<Resident> residents;
 
         [ICommand]
-        public async Task Tap()
+        public async Task Tap(int id)
         {
-            await Shell.
+            await Shell.Current.GoToAsync($"{nameof(ResidentAssignmentDetailPage)}?Id={id}");
         }
 
 

@@ -1,4 +1,4 @@
-using ViewModel;
+using App.ViewModel;
 
 namespace App;
 
@@ -9,12 +9,7 @@ public partial class EmployeePage : ContentPage
 	{
 		InitializeComponent();
 		this.viewModel = viewModel;
-		BindingContext = viewModel;
-	}
-
-	private void TapGestureRecognizer_Tapped(object sender, EventArgs e)
-	{
-
+		BindingContext = this.viewModel;
 	}
 
 	private async void Window_Loaded(object sender, EventArgs e)

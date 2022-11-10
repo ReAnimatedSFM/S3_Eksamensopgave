@@ -25,6 +25,12 @@ namespace RestApi.Controllers
             return Ok(await assignmentRepository.GetAllAsync());
         }
 
+        [HttpGet("{id}/Assignment")]
+        public async Task<ActionResult<IEnumerable<Assignment>>> GetAllAssignmentsAsync(int id)
+        {
+            return Ok(await assignmentRepository.GetByIdAsync(id));
+        }
+
         [HttpPost]
         public async Task<ActionResult<Assignment>> AddAssignment(Assignment assignment)
         {
@@ -34,11 +40,11 @@ namespace RestApi.Controllers
         }
 
         [HttpPut]
-        public async Task<ActionResult<IEnumerable<Assignment>>> UpdateAssignment(Assignment assignment)
+        public async Task<IActionResult> UpdateAssignment(Assignment assignment)
         {
             await assignmentRepository.UpdateAsync(assignment);
-            await unitOfWork.SaveAsync();
-            return Ok(await assignmentRepository.GetByIdAsync(assignment.Id));
+            await assignmentRepository.SaveAsync();
+            return Ok();
         }
 
         [HttpDelete("{id}")]
@@ -49,7 +55,7 @@ namespace RestApi.Controllers
             return Ok(await assignmentRepository.GetAllAsync());
         }
 
-        [HttpGet("{residentId}/Assignments")]
+        [HttpGet("{residentId}")]
         public async Task<ActionResult<IEnumerable<Assignment>>> GetAllAssignmentsByResidentAsync(int residentId)
         {
             return Ok(await unitOfWork.AssignmentRepository.GetAssignmentsByResidentAsync(residentId));

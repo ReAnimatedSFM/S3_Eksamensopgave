@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="App.ResidentAssignmentDetailPage"
+             Title="ResidentAssignmentDetailPage"
+             xmlns:viewmodel="clr-namespace:App.ViewModel"
+             xmlns:model="clr-namespace:Entities;assembly=Entities"
+             x:DataType="viewmodel:ResidentAssignmentDetailViewModel"
+             Loaded="Window_Loaded">
+
+
+    <Grid RowDefinitions="100, Auto, *"
+          ColumnDefinitions=".33*, .33*, .33*"
+          RowSpacing="10"
+          Padding="10">
+
+        <Label Text="Opgaver:"
+                   Grid.Row="1"
+                   Grid.ColumnSpan="2"/>
+        <Button Text="Tilbage"
+                Command="{Binding ReturnCommand}"
+                Grid.Row="1"
+                Grid.Column="2"/>
+
+
+        <!-- Binding Events/Layout -->
+
+        <ScrollView Padding="10" Grid.Row="2" Grid.ColumnSpan="2" Grid.RowSpan="1" BackgroundColor="Transparent">
+            <StackLayout BindableLayout.ItemsSource="{Binding Assignments}"
+                         BackgroundColor="Transparent">
+                <BindableLayout.ItemTemplate>
+                    <DataTemplate x:DataType="model:Assignment">
+
+
+
+                        <!-- Bindings / Stylings -->
+                        <Border Stroke="gray"
+                            StrokeThickness="2"
+                            StrokeShape="RoundRectangle 10,10,10,40">
+
+                            <StackLayout BackgroundColor="Orange" Padding="10">
+
+                                <Grid ColumnDefinitions=".20*, .20*, .20*, .20*, .20*"
+                                          ColumnSpacing="10" Margin="10">
+
+                                    <Label Text="{Binding Id}" FontAttributes="Bold" FontSize="18" Grid.Column="0"/>
+                                    <Label Text="Assistent:" FontAttributes="Bold" FontSize="18" Grid.Column="1"/>
+                                    <Label Text="{Binding EmployeeId}" FontAttributes="Bold" FontSize="18" Grid.Column="2"/>
+                                    <Label Text="BeboerId:" FontAttributes="Bold" FontSize="18" Grid.Column="3"/>
+                                    <Label Text="{Binding ResidentId}" FontAttributes="Bold" FontSize="18" Grid.Column="4"/>
+
+                                </Grid>
+
+                                <Grid ColumnDefinitions="Auto, Auto, Auto"
+                                      ColumnSpacing="50" Margin="10">
+                                    <Label Text="Navn:" FontAttributes="Bold" FontSize="18" Grid.Column="0"/>
+                                    <Label Text="{Binding Titel}" FontAttributes="Bold" FontSize="18" Grid.Column="2"/>
+                                </Grid>
+
+                                <Grid ColumnDefinitions="Auto, Auto, Auto"
+                                          ColumnSpacing="50" Margin="10">
+
+                                    <Label Text="Beskrivelse:" FontAttributes="Bold" FontSize="18" Grid.Column="0"/>
+                                    <Label Text="{Binding Description}" FontAttributes="Bold" FontSize="18" Grid.Column="2"/>
+
+                                </Grid>
+
+                                
+
+                                <Grid ColumnDefinitions="Auto, Auto, Auto"
+                                          RowSpacing="20"
+                                          ColumnSpacing="10" Margin="10">
+
+                                    <Label Text="Noter:" FontAttributes="Bold" FontSize="18" Grid.ColumnSpan="1" Grid.Column="0" Grid.Row="1" Grid.RowSpan="1"/>
+                                    <Editor x:Name="editor" Placeholder="{Binding Notes}" Text="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:ResidentAssignmentDetailViewModel}}, Path=UpdatedNotes}" HeightRequest="150" WidthRequest="300" MaximumWidthRequest="255"
+                                                AutoSize="TextChanges" Grid.Column="1" Grid.ColumnSpan="2" FontAutoScalingEnabled="True"/>
+                                </Grid>
+
+                                <Grid ColumnDefinitions=".33*, .33*, .33*"
+                                          ColumnSpacing="10" Margin="10">
+
+                                    <Label Text="Færdiggjort:" Grid.Column="0" FontAttributes="Bold" FontSize="18"/>
+                                    <Label Text="{Binding Finished}" FontAttributes="Bold" FontSize="18" Grid.Column="1"/>
+                                    <Button x:Name="updBtn" Grid.Column="2" Text="Færdiggør" TextColor="Black" HeightRequest="100" WidthRequest="100" BackgroundColor="Green"
+                                                Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:ResidentAssignmentDetailViewModel}}, Path=UpdateCommand}"
+                                                CommandParameter="{Binding Id}"/>
+                                </Grid>
+
+                                <Grid ColumnDefinitions=".33*, .33*, .33*"
+                                      ColumnSpacing="1"
+                                      Margin="10">
+
+                                    <Label Text="{Binding StartDate}" Grid.Column="0" FontAttributes="Bold" FontSize="18"/>
+                                    <Label Text="til" FontAttributes="Bold" FontSize="18" Grid.Column="1"/>
+                                    <Label Text="{Binding EndDate}" FontAttributes="Bold" FontSize="18" Grid.Column="2"/>
+
+                                </Grid>
+
+                            </StackLayout>
+
+                        </Border>
+
+                    </DataTemplate>
+                </BindableLayout.ItemTemplate>
+
+            </StackLayout>
+        </ScrollView>
+
+
+    </Grid>
+
+</ContentPage>
